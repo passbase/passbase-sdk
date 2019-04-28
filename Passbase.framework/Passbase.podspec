@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'Passbase'
-    spec.version        = '1.0.2'
+    spec.version        = '1.0.5'
     spec.summary        = 'Passbase helps you to uniquely identify your users.'
     spec.description    = 'Passbase completes a facial recognition and checks for a valid government identification document to uniquely identify people.'
     spec.homepage       = 'https://www.passbase.com'
@@ -23,11 +23,11 @@ Pod::Spec.new do |spec|
     spec.resource_bundles = {
         'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json}']
     }
+
     spec.dependency 'Alamofire', '~> 4.7.3'
     spec.dependency 'SwiftyJSON', '~> 4.0'
     spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.12'
 
-    spec.framework      = 'Passbase'
-    spec.vendored_frameworks = 'Passbase.framework'
-    
+    spec.vendored_frameworks = 'Passbase.framework', 'Alamofire.framework', 'SwiftyJSON.framework', 'ZoomAuthenticationHybrid.framework'
+
 end
