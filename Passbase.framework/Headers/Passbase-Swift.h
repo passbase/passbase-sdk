@@ -231,6 +231,8 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 
 
 
+
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -449,6 +451,8 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 

@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'Passbase'
-    spec.version        = '1.3.1'
+    spec.version        = '1.3.2'
     spec.summary        = 'Passbase helps you to uniquely identify your users.'
     spec.description    = 'Passbase completes a facial recognition and checks for a valid government identification document to uniquely identify people.'
     spec.homepage       = 'https://www.passbase.com'
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
     spec.author         = { 'Mathias J. Klenk' => 'mathias@passbase.com' }
     spec.platform       = :ios, '9.0'
     spec.swift_version  = '4.2'
-    spec.source       = { :git => 'https://github.com/passbase/passbase-sdk.git', :tag => spec.version.to_s }
+    spec.source       = { :git => 'https://github.com/passbase/passbase-sdk.git',:git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => spec.version.to_s }
     spec.requires_arc = true
     spec.source_files  = 'Passbase/**/*.{swift}'
     spec.resource_bundles = {
@@ -25,6 +25,7 @@ Pod::Spec.new do |spec|
     }
 
     spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.12'
+    spec.dependency 'Sentry', '~> 4.3.1'
 
     spec.vendored_frameworks = 'Passbase.framework'
 
