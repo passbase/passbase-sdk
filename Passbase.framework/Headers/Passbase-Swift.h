@@ -207,15 +207,21 @@ SWIFT_CLASS("_TtC8Passbase8Passbase")
 
 SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 @interface PassbaseButton : UIButton
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
 - (id _Nullable)awakeAfterUsingCoder:(NSCoder * _Nonnull)aDecoder SWIFT_WARN_UNUSED_RESULT;
 - (void)awakeFromNib;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
 
+
+
+SWIFT_CLASS("_TtC8Passbase15UICustomization")
+@interface UICustomization : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 
@@ -446,15 +452,21 @@ SWIFT_CLASS("_TtC8Passbase8Passbase")
 
 SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 @interface PassbaseButton : UIButton
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
 - (id _Nullable)awakeAfterUsingCoder:(NSCoder * _Nonnull)aDecoder SWIFT_WARN_UNUSED_RESULT;
 - (void)awakeFromNib;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
 
+
+
+SWIFT_CLASS("_TtC8Passbase15UICustomization")
+@interface UICustomization : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 
