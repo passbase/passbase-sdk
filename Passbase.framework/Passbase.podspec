@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'Passbase'
-    spec.version        = '1.3.7'
+    spec.version        = '1.4.0'
     spec.summary        = 'Passbase helps you to uniquely identify your users.'
     spec.description    = 'Passbase completes a facial recognition and checks for a valid government identification document to uniquely identify people.'
     spec.homepage       = 'https://www.passbase.com'
@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
     spec.requires_arc = true
     spec.source_files  = 'Passbase/**/*.{swift}'
     spec.resource_bundles = {
-        'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json}']
+        'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json,strings}']
     }
 
     spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.12'
