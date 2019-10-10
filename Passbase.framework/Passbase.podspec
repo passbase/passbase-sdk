@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'Passbase'
-    spec.version        = '1.4.2'
+    spec.version        = '1.5.0'
     spec.summary        = 'Passbase helps you to uniquely identify your users.'
     spec.description    = 'Passbase completes a facial recognition and checks for a valid government identification document to uniquely identify people.'
     spec.homepage       = 'https://www.passbase.com'

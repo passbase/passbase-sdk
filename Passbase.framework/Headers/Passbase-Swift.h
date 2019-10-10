@@ -278,6 +278,8 @@ SWIFT_CLASS("_TtC8Passbase15UICustomization")
 
 
 
+
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -539,6 +541,8 @@ SWIFT_CLASS("_TtC8Passbase15UICustomization")
 @interface UICustomization : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
