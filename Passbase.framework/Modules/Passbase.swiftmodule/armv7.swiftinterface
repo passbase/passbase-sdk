@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.1.2 effective-4.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
-// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name Passbase
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name Passbase
 import AVFoundation
 import AVKit
 import CoreGraphics
@@ -109,17 +109,34 @@ public protocol PassbaseDelegate : AnyObject {
   public var actionButtonBgColor: UIKit.UIColor!
   public var actionButtonDeactivatedBgColor: UIKit.UIColor!
   public var actionButtonTextColor: UIKit.UIColor!
-  public var actionButtonFont: UIKit.UIFont!
-  public var disclaimerTextFont: UIKit.UIFont!
+  public var actionButtonFont: UIKit.UIFont! {
+    get
+    }
+  public var disclaimerTextFont: UIKit.UIFont! {
+    get
+    }
   public var disclaimerTextColor: UIKit.UIColor!
-  public var titleTextFont: UIKit.UIFont!
+  public var titleTextFont: UIKit.UIFont! {
+    get
+    }
   public var titleTextColor: UIKit.UIColor!
-  public var subtitleTextFont: UIKit.UIFont!
+  public var subtitleTextFont: UIKit.UIFont! {
+    get
+    }
   public var subtitleTextColor: UIKit.UIColor!
-  public var inputTextFont: UIKit.UIFont!
-  public var mainFont: UIKit.UIFont!
-  public var mainBoldFont: UIKit.UIFont!
-  public var secondaryFont: UIKit.UIFont!
+  public var loadingIndicatorColor: UIKit.UIColor!
+  public var inputTextFont: UIKit.UIFont! {
+    get
+    }
+  public var mainFont: UIKit.UIFont! {
+    get
+    }
+  public var mainBoldFont: UIKit.UIFont! {
+    get
+    }
+  public var secondaryFont: UIKit.UIFont! {
+    get
+    }
   @objc override dynamic public init()
   @objc deinit
 }

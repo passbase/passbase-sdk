@@ -9,13 +9,13 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'Passbase'
-    spec.version        = '1.5.4'
+    spec.version        = '1.6.0'
     spec.summary        = 'Passbase helps you to uniquely identify your users.'
     spec.description    = 'Passbase completes a facial recognition and checks for a valid government identification document to uniquely identify people.'
     spec.homepage       = 'https://www.passbase.com'
     spec.license        = { type: 'custom', text: 'Passbase is Copyright 2019 Passbase, Inc.  It may not be modified.' }
     spec.author         = { 'Mathias J. Klenk' => 'mathias@passbase.com' }
-    spec.platform       = :ios, '9.0'
+    spec.platform       = :ios, '10.0'
     spec.swift_version  = '4.2'
     spec.source       = { :git => 'https://github.com/passbase/passbase-sdk.git', :tag => spec.version.to_s }
     spec.requires_arc = true
@@ -24,9 +24,10 @@ Pod::Spec.new do |spec|
         'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json,strings}']
     }
 
-    spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.18'
     spec.dependency 'Sentry', '~> 4.3.1'
 
-    spec.vendored_frameworks = 'Passbase.framework'
+    spec.vendored_frameworks = 'Passbase/Frameworks/ZoomAuthenticationHybrid.framework', 'Passbase.framework'
+    spec.preserve_path = 'Passbase/Frameworks/*'
+
 
 end
