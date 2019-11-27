@@ -1,0 +1,159 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 effective-4.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -Onone -module-name Passbase
+import AVFoundation
+import AVKit
+import CoreGraphics
+import CoreImage
+import CoreMotion
+import Foundation
+import ImageIO
+import MobileCoreServices
+@_exported import Passbase
+import Sentry
+import Swift
+import UIKit
+import ZoomAuthenticationHybrid
+public struct Rectangle {
+  public var topLeft: CoreGraphics.CGPoint
+  public var topRight: CoreGraphics.CGPoint
+  public var bottomRight: CoreGraphics.CGPoint
+  public var bottomLeft: CoreGraphics.CGPoint
+  public var description: Swift.String {
+    get
+  }
+}
+extension Rectangle : Swift.Equatable {
+  public static func == (lhs: Passbase.Rectangle, rhs: Passbase.Rectangle) -> Swift.Bool
+}
+extension UIResponder {
+  public var parentViewController: UIKit.UIViewController? {
+    get
+  }
+}
+@objc public class PassbaseButton : UIKit.UIButton {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func awakeAfter(using aDecoder: Foundation.NSCoder) -> Any?
+  @objc override dynamic public func awakeFromNib()
+  @objc deinit
+}
+public protocol ImageScannerControllerDelegate : ObjectiveC.NSObjectProtocol {
+  func imageScannerController(_ scanner: Passbase.ImageScannerController, didFinishScanningWithResults results: Passbase.ImageScannerResults)
+  func imageScannerControllerDidCancel(_ scanner: Passbase.ImageScannerController)
+  func imageScannerController(_ scanner: Passbase.ImageScannerController, didFailWithError error: Swift.Error)
+}
+@objc final public class ImageScannerController : UIKit.UINavigationController {
+  weak final public var imageScannerDelegate: Passbase.ImageScannerControllerDelegate?
+  required public init(image: UIKit.UIImage? = nil, delegate: Passbase.ImageScannerControllerDelegate? = nil, idType: Swift.String? = "PASSPORT", isFront: Swift.Bool? = true)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override final public var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
+  @objc override final public var shouldAutorotate: Swift.Bool {
+    @objc get
+  }
+  @objc override final public var preferredInterfaceOrientationForPresentation: UIKit.UIInterfaceOrientation {
+    @objc get
+  }
+  @available(iOS 5.0, *)
+  @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
+  @objc override dynamic public init(rootViewController: UIKit.UIViewController)
+  @objc deinit
+}
+public struct ImageScannerResults {
+  public var originalImage: UIKit.UIImage
+  public var scannedImage: UIKit.UIImage
+  public var detectedRectangle: Passbase.Rectangle
+}
+public enum ImageScannerControllerError : Swift.Error {
+  case authorization
+  case inputDevice
+  case capture
+  case ciImageCreation
+  public static func == (a: Passbase.ImageScannerControllerError, b: Passbase.ImageScannerControllerError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension ImageScannerControllerError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension UIColor {
+  public convenience init(_ hexString: Swift.String?)
+  public convenience init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
+}
+public protocol PassbaseDelegate : AnyObject {
+  func didCompletePassbaseVerification(authenticationKey: Swift.String)
+  func didCancelPassbaseVerification()
+}
+@objc public class Passbase : UIKit.UIViewController {
+  weak public static var delegate: Passbase.PassbaseDelegate?
+  public static var additionalAttributes: [Swift.String : Swift.String]?
+  public static var prefillUserEmail: Swift.String?
+  public static var buttonUI: Passbase.UICustomization!
+  public static func initialize(publishableApiKey: Swift.String)
+  public static func startVerification(from: UIKit.UIViewController) throws
+  public static func haptic()
+  public static func selectedDocumentName() -> Swift.String
+  public static func logSentry(message: Swift.String)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public class UICustomization : ObjectiveC.NSObject {
+  public var buttonBgColor: UIKit.UIColor!
+  public var actionButtonBgColor: UIKit.UIColor!
+  public var actionButtonDeactivatedBgColor: UIKit.UIColor!
+  public var actionButtonTextColor: UIKit.UIColor!
+  public var actionButtonFont: UIKit.UIFont! {
+    get
+    }
+  public var disclaimerTextFont: UIKit.UIFont! {
+    get
+    }
+  public var disclaimerTextColor: UIKit.UIColor!
+  public var titleTextFont: UIKit.UIFont! {
+    get
+    }
+  public var titleTextColor: UIKit.UIColor!
+  public var subtitleTextFont: UIKit.UIFont! {
+    get
+    }
+  public var subtitleTextColor: UIKit.UIColor!
+  public var loadingIndicatorColor: UIKit.UIColor!
+  public var inputTextFont: UIKit.UIFont! {
+    get
+    }
+  public var mainFont: UIKit.UIFont! {
+    get
+    }
+  public var mainBoldFont: UIKit.UIFont! {
+    get
+    }
+  public var secondaryFont: UIKit.UIFont! {
+    get
+    }
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension UIViewController {
+  public func getStartProgress(screenId: Swift.Float) -> Swift.Float
+  public func getEndProgress(screenId: Swift.Float) -> Swift.Float
+}
+extension _NSRange {
+  public init(range: Swift.Range<Swift.String.Index>, in string: Swift.String)
+  public init(range: Swift.ClosedRange<Swift.String.Index>, in string: Swift.String)
+}
+public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
+@objc public class CXEImagesToVideo : ObjectiveC.NSObject {
+  public class func videoSettings(codec: Swift.String, width: Swift.Int, height: Swift.Int) -> [Swift.String : Any]
+  public init(videoSettings: [Swift.String : Any])
+  public func createMovieFrom(urls: [Foundation.URL], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
+  public func createMovieFrom(images: [UIKit.UIImage], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
+  @objc override dynamic public init()
+  @objc deinit
+}

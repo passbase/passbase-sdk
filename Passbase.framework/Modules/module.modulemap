@@ -4,8 +4,3 @@ framework module Passbase {
   export *
   module * { export * }
 }
-
-module Passbase.Swift {
-    header "Passbase-Swift.h"
-    requires objc
-}

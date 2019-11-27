@@ -24,8 +24,8 @@ Pod::Spec.new do |spec|
         'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json,strings}']
     }
 
-    spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.18'
-    spec.dependency 'Sentry', '~> 4.3.1'
+    #spec.dependency 'ZoomAuthenticationHybrid', '~> 7.0.18'
+    #spec.dependency 'Sentry', '~> 4.3.1'
 
     spec.vendored_frameworks = 'Passbase.framework'
 
