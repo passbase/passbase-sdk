@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.1.2 effective-4.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
-// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -Onone -module-name Passbase
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name Passbase
 import AVFoundation
 import AVKit
 import CoreGraphics
@@ -83,8 +83,8 @@ extension ImageScannerControllerError : Foundation.LocalizedError {
   }
 }
 extension UIColor {
-  public convenience init(_ hexString: Swift.String?)
-  public convenience init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
+  convenience public init(_ hexString: Swift.String?)
+  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
 }
 public protocol PassbaseDelegate : AnyObject {
   func didCompletePassbaseVerification(authenticationKey: Swift.String)
@@ -157,3 +157,5 @@ public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
   @objc override dynamic public init()
   @objc deinit
 }
+extension Passbase.ImageScannerControllerError : Swift.Equatable {}
+extension Passbase.ImageScannerControllerError : Swift.Hashable {}
