@@ -97,6 +97,7 @@ public protocol PassbaseDelegate : AnyObject {
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
   public static func haptic()
+  public static func isUITesting() -> Swift.Bool
   public static func selectedDocumentName() -> Swift.String
   public static func logSentry(message: Swift.String)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
@@ -134,6 +135,9 @@ public protocol PassbaseDelegate : AnyObject {
     get
     }
   public var secondaryFont: UIKit.UIFont! {
+    get
+    }
+  public var tipsFont: UIKit.UIFont! {
     get
     }
   @objc override dynamic public init()
