@@ -10,6 +10,7 @@ import Foundation
 import ImageIO
 import MobileCoreServices
 @_exported import Passbase
+import Sentry
 import Swift
 import UIKit
 import ZoomAuthenticationHybrid
@@ -82,8 +83,8 @@ extension ImageScannerControllerError : Foundation.LocalizedError {
   }
 }
 extension UIColor {
-  public convenience init(_ hexString: Swift.String?)
-  public convenience init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
+  convenience public init(_ hexString: Swift.String?)
+  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
 }
 public protocol PassbaseDelegate : AnyObject {
   func didCompletePassbaseVerification(authenticationKey: Swift.String)
@@ -160,3 +161,5 @@ public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
   @objc override dynamic public init()
   @objc deinit
 }
+extension Passbase.ImageScannerControllerError : Swift.Equatable {}
+extension Passbase.ImageScannerControllerError : Swift.Hashable {}
