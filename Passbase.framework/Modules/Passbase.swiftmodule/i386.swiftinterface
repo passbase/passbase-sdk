@@ -44,7 +44,7 @@ public protocol ImageScannerControllerDelegate : ObjectiveC.NSObjectProtocol {
 }
 @objc final public class ImageScannerController : UIKit.UINavigationController {
   weak final public var imageScannerDelegate: Passbase.ImageScannerControllerDelegate?
-  required public init(image: UIKit.UIImage? = nil, delegate: Passbase.ImageScannerControllerDelegate? = nil, idType: Swift.String? = "PASSPORT", isFront: Swift.Bool? = true)
+  required public init(image: UIKit.UIImage? = nil, delegate: Passbase.ImageScannerControllerDelegate? = nil, question: Swift.String, idType: Swift.String? = "PASSPORT", isFront: Swift.Bool? = true)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc override final public var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
