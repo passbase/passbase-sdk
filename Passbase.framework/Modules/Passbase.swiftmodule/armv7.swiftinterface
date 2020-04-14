@@ -94,6 +94,7 @@ public protocol PassbaseDelegate : AnyObject {
   weak public static var delegate: Passbase.PassbaseDelegate?
   public static var additionalAttributes: [Swift.String : Swift.String]?
   public static var prefillUserEmail: Swift.String?
+  public static var userEmail: Swift.String?
   public static var buttonUI: Passbase.UICustomization!
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
