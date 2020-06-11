@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.2 effective-4.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)
+// swift-compiler-version: Apple Swift version 5.2.4 effective-4.2 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
@@ -12,7 +12,7 @@ import MobileCoreServices
 @_exported import Passbase
 import Swift
 import UIKit
-import ZoomAuthenticationHybrid
+import ZoomAuthentication
 public struct Rectangle {
   public var topLeft: CoreGraphics.CGPoint
   public var topRight: CoreGraphics.CGPoint
@@ -94,13 +94,20 @@ public protocol PassbaseDelegate : AnyObject {
   public static var additionalAttributes: [Swift.String : Swift.String]?
   public static var prefillUserEmail: Swift.String?
   public static var userEmail: Swift.String?
+  public static var source: Swift.Int
   public static var buttonUI: Passbase.UICustomization!
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
   public static func haptic()
   public static func isUITesting() -> Swift.Bool
   public static func shouldDisableTimer() -> Swift.Bool
-  public static func selectedDocumentName() -> Swift.String
+  public static func saveDocuments(array: [Swift.String])
+  public static func composeGifName(name: Swift.String) -> Swift.String
+  @discardableResult
+  public static func checkNextStep(next_step: Swift.AnyObject) -> Swift.Bool
+  public static func initZoom()
+  public static func changeZoomLocalization()
+  public static func deinitZoom()
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
