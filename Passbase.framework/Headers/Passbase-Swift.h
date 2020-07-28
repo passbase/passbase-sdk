@@ -188,7 +188,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import AVFoundation;
 @import CoreGraphics;
 @import Foundation;
 @import ObjectiveC;
@@ -211,8 +210,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-
-
 SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 @interface CXEImagesToVideo : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -221,19 +218,6 @@ SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 
 @class NSBundle;
 @class NSCoder;
-@class UIViewController;
-
-SWIFT_CLASS("_TtC8Passbase22ImageScannerController")
-@interface ImageScannerController : UINavigationController
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
-@property (nonatomic, readonly) BOOL shouldAutorotate;
-@property (nonatomic, readonly) UIInterfaceOrientation preferredInterfaceOrientationForPresentation;
-- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
-@end
-
 
 SWIFT_CLASS("_TtC8Passbase8Passbase")
 @interface Passbase : UIViewController
@@ -257,12 +241,6 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 
 
 
-
-
-SWIFT_CLASS("_TtC8Passbase15UICustomization")
-@interface UICustomization : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
 
 
 
@@ -480,7 +458,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import AVFoundation;
 @import CoreGraphics;
 @import Foundation;
 @import ObjectiveC;
@@ -503,8 +480,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-
-
 SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 @interface CXEImagesToVideo : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -513,19 +488,6 @@ SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 
 @class NSBundle;
 @class NSCoder;
-@class UIViewController;
-
-SWIFT_CLASS("_TtC8Passbase22ImageScannerController")
-@interface ImageScannerController : UINavigationController
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
-@property (nonatomic, readonly) BOOL shouldAutorotate;
-@property (nonatomic, readonly) UIInterfaceOrientation preferredInterfaceOrientationForPresentation;
-- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
-@end
-
 
 SWIFT_CLASS("_TtC8Passbase8Passbase")
 @interface Passbase : UIViewController
@@ -549,12 +511,6 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 
 
 
-
-
-SWIFT_CLASS("_TtC8Passbase15UICustomization")
-@interface UICustomization : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
 
 
 

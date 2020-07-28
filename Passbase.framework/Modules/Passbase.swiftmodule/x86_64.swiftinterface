@@ -3,28 +3,14 @@
 // swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
-import CoreGraphics
-import CoreImage
-import CoreMotion
 import Foundation
-import ImageIO
+import Lottie
+import Microblink
 import MobileCoreServices
 @_exported import Passbase
 import Swift
 import UIKit
 import ZoomAuthentication
-public struct Rectangle {
-  public var topLeft: CoreGraphics.CGPoint
-  public var topRight: CoreGraphics.CGPoint
-  public var bottomRight: CoreGraphics.CGPoint
-  public var bottomLeft: CoreGraphics.CGPoint
-  public var description: Swift.String {
-    get
-  }
-}
-extension Rectangle : Swift.Equatable {
-  public static func == (lhs: Passbase.Rectangle, rhs: Passbase.Rectangle) -> Swift.Bool
-}
 extension UIResponder {
   public var parentViewController: UIKit.UIViewController? {
     get
@@ -34,56 +20,8 @@ extension UIResponder {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func awakeAfter(using aDecoder: Foundation.NSCoder) -> Any?
   @objc override dynamic public func awakeFromNib()
+  public func customize(mainButtonColor: Swift.String)
   @objc deinit
-}
-public protocol ImageScannerControllerDelegate : ObjectiveC.NSObjectProtocol {
-  func imageScannerController(_ scanner: Passbase.ImageScannerController, didFinishScanningWithResults results: Passbase.ImageScannerResults)
-  func imageScannerControllerDidCancel(_ scanner: Passbase.ImageScannerController)
-  func imageScannerController(_ scanner: Passbase.ImageScannerController, didFailWithError error: Swift.Error)
-}
-@objc final public class ImageScannerController : UIKit.UINavigationController {
-  weak final public var imageScannerDelegate: Passbase.ImageScannerControllerDelegate?
-  required public init(image: UIKit.UIImage? = nil, delegate: Passbase.ImageScannerControllerDelegate? = nil, question: Swift.String, idType: Swift.String? = "PASSPORT", isFront: Swift.Bool? = true)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc override final public var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
-    @objc get
-  }
-  @objc override final public var shouldAutorotate: Swift.Bool {
-    @objc get
-  }
-  @objc override final public var preferredInterfaceOrientationForPresentation: UIKit.UIInterfaceOrientation {
-    @objc get
-  }
-  @objc deinit
-  @available(iOS 5.0, *)
-  @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
-  @objc override dynamic public init(rootViewController: UIKit.UIViewController)
-}
-public struct ImageScannerResults {
-  public var originalImage: UIKit.UIImage
-  public var scannedImage: UIKit.UIImage
-  public var detectedRectangle: Passbase.Rectangle
-}
-public enum ImageScannerControllerError : Swift.Error {
-  case authorization
-  case inputDevice
-  case capture
-  case ciImageCreation
-  public static func == (a: Passbase.ImageScannerControllerError, b: Passbase.ImageScannerControllerError) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
-}
-extension ImageScannerControllerError : Foundation.LocalizedError {
-  public var errorDescription: Swift.String? {
-    get
-  }
-}
-extension UIColor {
-  convenience public init(_ hexString: Swift.String?)
-  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
 }
 public protocol PassbaseDelegate : AnyObject {
   func didCompletePassbaseVerification(authenticationKey: Swift.String)
@@ -95,16 +33,18 @@ public protocol PassbaseDelegate : AnyObject {
   public static var prefillUserEmail: Swift.String?
   public static var userEmail: Swift.String?
   public static var source: Swift.Int
-  public static var buttonUI: Passbase.UICustomization!
+  weak public static var button: Passbase.PassbaseButton!
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
-  public static func haptic()
+  public static func haptic(style: UIKit.UIImpactFeedbackGenerator.FeedbackStyle? = .light)
+  public static func errorHaptic()
   public static func isUITesting() -> Swift.Bool
   public static func shouldDisableTimer() -> Swift.Bool
   public static func saveDocuments(array: [Swift.String])
-  public static func composeGifName(name: Swift.String) -> Swift.String
-  @discardableResult
-  public static func checkNextStep(next_step: Swift.AnyObject) -> Swift.Bool
+  public static func saveCustomization(json: [Swift.String : Swift.AnyObject]?)
+  public static func saveFont(fontName: Swift.String)
+  public static func saveAcceptedCountries(json: [Swift.String : Swift.AnyObject]?)
+  public static func composeAnimationName(name: Swift.String) -> Swift.String
   public static func initZoom()
   public static func changeZoomLocalization()
   public static func deinitZoom()
@@ -112,48 +52,16 @@ public protocol PassbaseDelegate : AnyObject {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-@objc @_inheritsConvenienceInitializers public class UICustomization : ObjectiveC.NSObject {
-  public var buttonBgColor: UIKit.UIColor!
-  public var actionButtonBgColor: UIKit.UIColor!
-  public var actionButtonDeactivatedBgColor: UIKit.UIColor!
-  public var actionButtonTextColor: UIKit.UIColor!
-  public var actionButtonFont: UIKit.UIFont! {
-    get
-  }
-  public var disclaimerTextFont: UIKit.UIFont! {
-    get
-  }
-  public var disclaimerTextColor: UIKit.UIColor!
-  public var titleTextFont: UIKit.UIFont! {
-    get
-  }
-  public var titleTextColor: UIKit.UIColor!
-  public var subtitleTextFont: UIKit.UIFont! {
-    get
-  }
-  public var subtitleTextColor: UIKit.UIColor!
-  public var loadingIndicatorColor: UIKit.UIColor!
-  public var inputTextFont: UIKit.UIFont! {
-    get
-  }
-  public var mainFont: UIKit.UIFont! {
-    get
-  }
-  public var mainBoldFont: UIKit.UIFont! {
-    get
-  }
-  public var secondaryFont: UIKit.UIFont! {
-    get
-  }
-  public var tipsFont: UIKit.UIFont! {
-    get
-  }
-  @objc deinit
-  @objc override dynamic public init()
-}
 extension UIViewController {
   public func getStartProgress(screenId: Swift.Float) -> Swift.Float
   public func getEndProgress(screenId: Swift.Float) -> Swift.Float
+}
+extension UIColor {
+  convenience public init(_ hexString: Swift.String?)
+  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
+}
+extension UIFont {
+  public static func jbs_registerFont(withFilenameString filenameString: Swift.String, bundle: Foundation.Bundle)
 }
 extension _NSRange {
   public init(range: Swift.Range<Swift.String.Index>, in string: Swift.String)
@@ -168,5 +76,3 @@ public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
   @objc override dynamic public init()
   @objc deinit
 }
-extension Passbase.ImageScannerControllerError : Swift.Equatable {}
-extension Passbase.ImageScannerControllerError : Swift.Hashable {}

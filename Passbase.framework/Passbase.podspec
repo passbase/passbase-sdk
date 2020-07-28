@@ -21,10 +21,12 @@ Pod::Spec.new do |spec|
     spec.requires_arc = true
     spec.source_files  = 'Passbase/**/*.{swift}'
     spec.resource_bundles = {
-        'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,xib,json,strings}']
+        'Passbase' => ['Passbase/**/*.{storyboard,png,gif,xcassets,ttf,otf,xib,json,strings,bundle}']
     }
 
     spec.dependency 'ZoomAuthentication', '8.7.1'
+    spec.dependency 'Microblink', '5.5.0'
+    spec.dependency 'lottie-ios'
     spec.vendored_frameworks = 'Passbase.framework'
 
 end
