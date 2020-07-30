@@ -26,28 +26,15 @@ extension UIResponder {
 public protocol PassbaseDelegate : AnyObject {
   func didCompletePassbaseVerification(authenticationKey: Swift.String)
   func didCancelPassbaseVerification()
+  func didStartPassbaseVerification()
 }
 @objc @_inheritsConvenienceInitializers public class Passbase : UIKit.UIViewController {
   weak public static var delegate: Passbase.PassbaseDelegate?
   public static var additionalAttributes: [Swift.String : Swift.String]?
   public static var prefillUserEmail: Swift.String?
-  public static var userEmail: Swift.String?
   public static var source: Swift.Int
-  weak public static var button: Passbase.PassbaseButton!
+  weak public static var button: Passbase.PassbaseButton?
   public static func initialize(publishableApiKey: Swift.String)
-  public static func startVerification(from: UIKit.UIViewController) throws
-  public static func haptic(style: UIKit.UIImpactFeedbackGenerator.FeedbackStyle? = .light)
-  public static func errorHaptic()
-  public static func isUITesting() -> Swift.Bool
-  public static func shouldDisableTimer() -> Swift.Bool
-  public static func saveDocuments(array: [Swift.String])
-  public static func saveCustomization(json: [Swift.String : Swift.AnyObject]?)
-  public static func saveFont(fontName: Swift.String)
-  public static func saveAcceptedCountries(json: [Swift.String : Swift.AnyObject]?)
-  public static func composeAnimationName(name: Swift.String) -> Swift.String
-  public static func initZoom()
-  public static func changeZoomLocalization()
-  public static func deinitZoom()
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
