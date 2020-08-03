@@ -35,6 +35,7 @@ public protocol PassbaseDelegate : AnyObject {
   public static var source: Swift.Int
   weak public static var button: Passbase.PassbaseButton?
   public static func initialize(publishableApiKey: Swift.String)
+  public static func startVerification(from: UIKit.UIViewController) throws
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
