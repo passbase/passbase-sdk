@@ -191,6 +191,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreGraphics;
 @import Foundation;
 @import ObjectiveC;
+@import QuartzCore;
 @import UIKit;
 #endif
 
@@ -209,6 +210,49 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class NSCoder;
+@class UITouch;
+@class UIEvent;
+
+/// Lottie comes prepacked with a two Animated Controls, <code>AnimatedSwitch</code> and
+/// <code>AnimatedButton</code>. Both of these controls are built on top of <code>AnimatedControl</code>
+/// <code>AnimatedControl</code> is a subclass of <code>UIControl</code> that provides an interactive
+/// mechanism for controlling the visual state of an animation in response to
+/// user actions.
+/// The <code>AnimatedControl</code> will show and hide layers depending on the current
+/// <code>UIControl.State</code> of the control.
+/// Users of <code>AnimationControl</code> can set a Layer Name for each <code>UIControl.State</code>.
+/// When the state is change the <code>AnimationControl</code> will change the visibility
+/// of its layers.
+/// NOTE: Do not initialize directly. This is intended to be subclassed.
+SWIFT_CLASS("_TtC8Passbase15AnimatedControl")
+@interface AnimatedControl : UIControl
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+- (BOOL)beginTrackingWithTouch:(UITouch * _Nonnull)touch withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)continueTrackingWithTouch:(UITouch * _Nonnull)touch withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
+- (void)endTrackingWithTouch:(UITouch * _Nullable)touch withEvent:(UIEvent * _Nullable)event;
+- (void)cancelTrackingWithEvent:(UIEvent * _Nullable)event;
+@property (nonatomic, readonly) CGSize intrinsicContentSize;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+
+/// A view that can be added to a keypath of an AnimationView
+SWIFT_CLASS("_TtC8Passbase16AnimationSubview")
+@interface AnimationSubview : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+
 
 SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 @interface CXEImagesToVideo : NSObject
@@ -216,8 +260,43 @@ SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+
+/// An Objective-C compatible wrapper around Lottie’s Animation class.
+/// Use in tandem with CompatibleAnimationView when using Lottie in Objective-C
+SWIFT_CLASS("_TtC8Passbase19CompatibleAnimation")
+@interface CompatibleAnimation : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// An Objective-C compatible wrapper around Lottie’s AnimationKeypath
+SWIFT_CLASS("_TtC8Passbase26CompatibleAnimationKeypath")
+@interface CompatibleAnimationKeypath : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// An Objective-C compatible wrapper around Lottie’s AnimationView.
+SWIFT_CLASS("_TtC8Passbase23CompatibleAnimationView")
+@interface CompatibleAnimationView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+@property (nonatomic) UIViewContentMode contentMode;
+@end
+
+
+SWIFT_CLASS("_TtC8Passbase10LottieView")
+@interface LottieView : UIView
+- (void)didMoveToWindow;
+@property (nonatomic) UIViewContentMode contentMode;
+- (void)layoutSubviews;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSBundle;
-@class NSCoder;
 
 SWIFT_CLASS("_TtC8Passbase8Passbase")
 @interface Passbase : UIViewController
@@ -233,6 +312,8 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 - (id _Nullable)awakeAfterUsingCoder:(NSCoder * _Nonnull)aDecoder SWIFT_WARN_UNUSED_RESULT;
 - (void)awakeFromNib;
 @end
+
+
 
 
 
@@ -461,6 +542,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreGraphics;
 @import Foundation;
 @import ObjectiveC;
+@import QuartzCore;
 @import UIKit;
 #endif
 
@@ -479,6 +561,49 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class NSCoder;
+@class UITouch;
+@class UIEvent;
+
+/// Lottie comes prepacked with a two Animated Controls, <code>AnimatedSwitch</code> and
+/// <code>AnimatedButton</code>. Both of these controls are built on top of <code>AnimatedControl</code>
+/// <code>AnimatedControl</code> is a subclass of <code>UIControl</code> that provides an interactive
+/// mechanism for controlling the visual state of an animation in response to
+/// user actions.
+/// The <code>AnimatedControl</code> will show and hide layers depending on the current
+/// <code>UIControl.State</code> of the control.
+/// Users of <code>AnimationControl</code> can set a Layer Name for each <code>UIControl.State</code>.
+/// When the state is change the <code>AnimationControl</code> will change the visibility
+/// of its layers.
+/// NOTE: Do not initialize directly. This is intended to be subclassed.
+SWIFT_CLASS("_TtC8Passbase15AnimatedControl")
+@interface AnimatedControl : UIControl
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+- (BOOL)beginTrackingWithTouch:(UITouch * _Nonnull)touch withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)continueTrackingWithTouch:(UITouch * _Nonnull)touch withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
+- (void)endTrackingWithTouch:(UITouch * _Nullable)touch withEvent:(UIEvent * _Nullable)event;
+- (void)cancelTrackingWithEvent:(UIEvent * _Nullable)event;
+@property (nonatomic, readonly) CGSize intrinsicContentSize;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+
+/// A view that can be added to a keypath of an AnimationView
+SWIFT_CLASS("_TtC8Passbase16AnimationSubview")
+@interface AnimationSubview : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+
 
 SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 @interface CXEImagesToVideo : NSObject
@@ -486,8 +611,43 @@ SWIFT_CLASS("_TtC8Passbase16CXEImagesToVideo")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+
+/// An Objective-C compatible wrapper around Lottie’s Animation class.
+/// Use in tandem with CompatibleAnimationView when using Lottie in Objective-C
+SWIFT_CLASS("_TtC8Passbase19CompatibleAnimation")
+@interface CompatibleAnimation : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// An Objective-C compatible wrapper around Lottie’s AnimationKeypath
+SWIFT_CLASS("_TtC8Passbase26CompatibleAnimationKeypath")
+@interface CompatibleAnimationKeypath : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// An Objective-C compatible wrapper around Lottie’s AnimationView.
+SWIFT_CLASS("_TtC8Passbase23CompatibleAnimationView")
+@interface CompatibleAnimationView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+@property (nonatomic) UIViewContentMode contentMode;
+@end
+
+
+SWIFT_CLASS("_TtC8Passbase10LottieView")
+@interface LottieView : UIView
+- (void)didMoveToWindow;
+@property (nonatomic) UIViewContentMode contentMode;
+- (void)layoutSubviews;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSBundle;
-@class NSCoder;
 
 SWIFT_CLASS("_TtC8Passbase8Passbase")
 @interface Passbase : UIViewController
@@ -503,6 +663,8 @@ SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 - (id _Nullable)awakeAfterUsingCoder:(NSCoder * _Nonnull)aDecoder SWIFT_WARN_UNUSED_RESULT;
 - (void)awakeFromNib;
 @end
+
+
 
 
 

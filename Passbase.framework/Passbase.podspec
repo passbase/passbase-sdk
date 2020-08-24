@@ -26,7 +26,6 @@ Pod::Spec.new do |spec|
 
     spec.dependency 'ZoomAuthentication', '8.7.1'
     spec.dependency 'Microblink', '5.5.0'
-    spec.dependency 'lottie-ios'
     spec.vendored_frameworks = 'Passbase.framework'
 
 end
