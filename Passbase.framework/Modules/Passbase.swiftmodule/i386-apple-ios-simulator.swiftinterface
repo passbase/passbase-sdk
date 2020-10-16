@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 effective-4.2 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
-// swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -Onone -module-name Passbase
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
 import CoreGraphics
@@ -21,10 +21,10 @@ extension UIResponder {
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PassbaseButton : UIKit.UIButton {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
   @objc override dynamic public func awakeAfter(using aDecoder: Foundation.NSCoder) -> Any?
   @objc override dynamic public func awakeFromNib()
   public func customize(mainButtonColor: Swift.String)
-  @objc deinit
 }
 @_hasMissingDesignatedInitializers final public class FloatValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
@@ -48,6 +48,9 @@ public protocol AnyValueProvider {
   @objc deinit
 }
 public struct AnimationKeypath {
+}
+public struct URLParameterEncoder : Passbase.ParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
 }
 extension PBAnimation {
   public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationCache: Passbase.AnimationCacheProvider? = nil) -> Passbase.PBAnimation?
@@ -164,11 +167,38 @@ public typealias AnimationProgressTime = CoreGraphics.CGFloat
   final public func value(frame: CoreGraphics.CGFloat) -> Any
   @objc deinit
 }
+public typealias Parameters = [Swift.String : Any]
+public protocol ParameterEncoder {
+  func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
+}
+public enum ParameterEncoding {
+  case urlEncoding
+  case jsonEncoding
+  case urlAndJsonEncoding
+  public func encode(urlRequest: inout Foundation.URLRequest, bodyParameters: Passbase.Parameters?, urlParameters: Passbase.Parameters?) throws
+  public static func == (a: Passbase.ParameterEncoding, b: Passbase.ParameterEncoding) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum NetworkError : Swift.String, Swift.Error {
+  case parametersNil
+  case encodingFailed
+  case missingURL
+  case missingFile
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
 public class Asset : Swift.Codable {
   required public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
 }
+public typealias NetworkRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
 @_hasMissingDesignatedInitializers final public class PointValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
     get
@@ -258,6 +288,14 @@ public enum BlendMode : Swift.Int, Swift.Codable {
   @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
 }
+public typealias HTTPHeaders = [Swift.String : Swift.String]
+public enum HTTPTask {
+  case request
+  case requestParameters(bodyParameters: Passbase.Parameters?, bodyEncoding: Passbase.ParameterEncoding, urlParameters: Passbase.Parameters?)
+  case requestParametersAndHeaders(bodyParameters: Passbase.Parameters?, bodyEncoding: Passbase.ParameterEncoding, urlParameters: Passbase.Parameters?, additionHeaders: Passbase.HTTPHeaders?)
+  case requestUploadData(additionHeaders: Passbase.HTTPHeaders?)
+  case uploadDataWithProgress(additionHeaders: Passbase.HTTPHeaders?)
+}
 public protocol AnimationTextProvider : AnyObject {
   func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
 }
@@ -274,25 +312,21 @@ public protocol AnimationTextProvider : AnyObject {
   @objc deinit
 }
 public protocol PassbaseDelegate : AnyObject {
-  func didCompletePassbaseVerification(authenticationKey: Swift.String)
-  func didCancelPassbaseVerification()
-  func didStartPassbaseVerification()
+  func onFinish(identityAccessKey: Swift.String)
+  func onError(errorCode: Swift.String)
+  func onStart()
 }
-@objc @_inheritsConvenienceInitializers public class Passbase : UIKit.UIViewController {
+@objc @_inheritsConvenienceInitializers public class PassbaseSDK : ObjectiveC.NSObject {
   weak public static var delegate: Passbase.PassbaseDelegate?
-  public static var additionalAttributes: [Swift.String : Swift.String]?
-  public static var prefillUserEmail: Swift.String?
+  public static var prefillUserEmail: Swift.String? {
+    get
+    set
+  }
   public static var source: Swift.Int
-  weak public static var button: Passbase.PassbaseButton?
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
   @objc deinit
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-}
-extension UIViewController {
-  public func getStartProgress(screenId: Swift.Float) -> Swift.Float
-  public func getEndProgress(screenId: Swift.Float) -> Swift.Float
+  @objc override dynamic public init()
 }
 extension UIColor {
   convenience public init(_ hexString: Swift.String?)
@@ -305,6 +339,18 @@ extension _NSRange {
   public init(range: Swift.Range<Swift.String.Index>, in string: Swift.String)
   public init(range: Swift.ClosedRange<Swift.String.Index>, in string: Swift.String)
 }
+public struct JSONParameterEncoder : Passbase.ParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
+}
+public enum HTTPMethod : Swift.String {
+  case get
+  case post
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
 infix operator +| : DefaultPrecedence
 infix operator +- : DefaultPrecedence
 public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
@@ -313,8 +359,8 @@ public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
   public init(videoSettings: [Swift.String : Any])
   public func createMovieFrom(urls: [Foundation.URL], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
   public func createMovieFrom(images: [UIKit.UIImage], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 extension Vector1D : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
@@ -364,6 +410,12 @@ public struct Vector3D {
   final public func value(frame: CoreGraphics.CGFloat) -> Any
   @objc deinit
 }
+public enum PassbaseApi {
+  case completeVerification(email: Swift.String, identityAccessKey: Swift.String, country: Swift.String?, imageFrontData: Foundation.Data?, imageBackData: Foundation.Data?, additionalImageFrontData: Foundation.Data?, additionalImageBackData: Foundation.Data?, documentType: Swift.String?, additionalDocumentType: Swift.String?, ocrData: Swift.String?, additionalOcrData: Swift.String?, boundary: Swift.String)
+  case settings
+  case saveUser(email: Swift.String, facemapId: Swift.String, zoomSessionId: Swift.String, selfieData: Swift.String, boundary: Swift.String)
+  case getUser(email: Swift.String, boundary: Swift.String)
+}
 extension UIColor {
   public var lottieColorValue: Passbase.Color {
     get
@@ -381,6 +433,11 @@ extension Passbase.LottieBackgroundBehavior : Swift.Hashable {}
 extension Passbase.CoordinateSpace : Swift.Equatable {}
 extension Passbase.CoordinateSpace : Swift.Hashable {}
 extension Passbase.CoordinateSpace : Swift.RawRepresentable {}
+extension Passbase.ParameterEncoding : Swift.Equatable {}
+extension Passbase.ParameterEncoding : Swift.Hashable {}
+extension Passbase.NetworkError : Swift.Equatable {}
+extension Passbase.NetworkError : Swift.Hashable {}
+extension Passbase.NetworkError : Swift.RawRepresentable {}
 extension Passbase.LayerType : Swift.Equatable {}
 extension Passbase.LayerType : Swift.Hashable {}
 extension Passbase.LayerType : Swift.RawRepresentable {}
@@ -390,3 +447,6 @@ extension Passbase.MatteType : Swift.RawRepresentable {}
 extension Passbase.BlendMode : Swift.Equatable {}
 extension Passbase.BlendMode : Swift.Hashable {}
 extension Passbase.BlendMode : Swift.RawRepresentable {}
+extension Passbase.HTTPMethod : Swift.Equatable {}
+extension Passbase.HTTPMethod : Swift.Hashable {}
+extension Passbase.HTTPMethod : Swift.RawRepresentable {}
