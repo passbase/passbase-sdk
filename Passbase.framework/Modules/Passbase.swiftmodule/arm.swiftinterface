@@ -415,6 +415,7 @@ public enum PassbaseApi {
   case settings
   case saveUser(email: Swift.String, facemapId: Swift.String, zoomSessionId: Swift.String, selfieData: Swift.String, boundary: Swift.String)
   case getUser(email: Swift.String, boundary: Swift.String)
+  case getToken(email: Swift.String, boundary: Swift.String)
 }
 extension UIColor {
   public var lottieColorValue: Passbase.Color {
