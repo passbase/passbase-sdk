@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
@@ -14,17 +14,15 @@ import Swift
 import UIKit
 import ZoomAuthentication
 public typealias LottieCompletionBlock = (Swift.Bool) -> Swift.Void
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PassbaseButton : UIKit.UIButton {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func awakeFromNib()
+  @objc deinit
+}
 extension UIResponder {
   public var parentViewController: UIKit.UIViewController? {
     get
   }
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PassbaseButton : UIKit.UIButton {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc deinit
-  @objc override dynamic public func awakeAfter(using aDecoder: Foundation.NSCoder) -> Any?
-  @objc override dynamic public func awakeFromNib()
-  public func customize(mainButtonColor: Swift.String)
 }
 @_hasMissingDesignatedInitializers final public class FloatValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
@@ -110,6 +108,10 @@ public struct Color {
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+extension UIColor {
+  convenience public init(_ hexString: Swift.String?)
+  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
+}
 public enum LottieBackgroundBehavior {
   case stop
   case pause
@@ -159,6 +161,9 @@ final public class PBAnimation : Swift.Codable {
 }
 public typealias AnimationFrameTime = CoreGraphics.CGFloat
 public typealias AnimationProgressTime = CoreGraphics.CGFloat
+extension UIFont {
+  public static func jbs_registerFont(withFilenameString filenameString: Swift.String, bundle: Foundation.Bundle)
+}
 @_hasMissingDesignatedInitializers final public class GradientValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
     get
@@ -317,27 +322,20 @@ public protocol PassbaseDelegate : AnyObject {
   func onStart()
 }
 @objc @_inheritsConvenienceInitializers public class PassbaseSDK : ObjectiveC.NSObject {
+  public static let version: Swift.String
   weak public static var delegate: Passbase.PassbaseDelegate?
   public static var prefillUserEmail: Swift.String? {
     get
     set
   }
-  public static var source: Swift.Int
+  public static var source: Swift.Int {
+    get
+    set
+  }
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
   @objc deinit
   @objc override dynamic public init()
-}
-extension UIColor {
-  convenience public init(_ hexString: Swift.String?)
-  convenience public init(hexString: Swift.String?, alpha: Swift.Float = 1.0)
-}
-extension UIFont {
-  public static func jbs_registerFont(withFilenameString filenameString: Swift.String, bundle: Foundation.Bundle)
-}
-extension _NSRange {
-  public init(range: Swift.Range<Swift.String.Index>, in string: Swift.String)
-  public init(range: Swift.ClosedRange<Swift.String.Index>, in string: Swift.String)
 }
 public struct JSONParameterEncoder : Passbase.ParameterEncoder {
   public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
@@ -353,15 +351,6 @@ public enum HTTPMethod : Swift.String {
 }
 infix operator +| : DefaultPrecedence
 infix operator +- : DefaultPrecedence
-public typealias CXEMovieMakerCompletion = (Foundation.URL) -> Swift.Void
-@objc public class CXEImagesToVideo : ObjectiveC.NSObject {
-  public class func videoSettings(codec: Swift.String, width: Swift.Int, height: Swift.Int) -> [Swift.String : Any]
-  public init(videoSettings: [Swift.String : Any])
-  public func createMovieFrom(urls: [Foundation.URL], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
-  public func createMovieFrom(images: [UIKit.UIImage], withCompletion: @escaping Passbase.CXEMovieMakerCompletion)
-  @objc deinit
-  @objc override dynamic public init()
-}
 extension Vector1D : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
@@ -410,13 +399,6 @@ public struct Vector3D {
   final public func value(frame: CoreGraphics.CGFloat) -> Any
   @objc deinit
 }
-public enum PassbaseApi {
-  case completeVerification(email: Swift.String, identityAccessKey: Swift.String, country: Swift.String?, imageFrontData: Foundation.Data?, imageBackData: Foundation.Data?, additionalImageFrontData: Foundation.Data?, additionalImageBackData: Foundation.Data?, documentType: Swift.String?, additionalDocumentType: Swift.String?, ocrData: Swift.String?, additionalOcrData: Swift.String?, boundary: Swift.String)
-  case settings
-  case saveUser(email: Swift.String, facemapId: Swift.String, zoomSessionId: Swift.String, selfieData: Swift.String, boundary: Swift.String)
-  case getUser(email: Swift.String, boundary: Swift.String)
-  case getToken(email: Swift.String, boundary: Swift.String)
-}
 extension UIColor {
   public var lottieColorValue: Passbase.Color {
     get
@@ -426,6 +408,13 @@ public protocol AnimationCacheProvider {
   func animation(forKey: Swift.String) -> Passbase.PBAnimation?
   func setAnimation(_ animation: Passbase.PBAnimation, forKey: Swift.String)
   func clearCache()
+}
+extension Array where Element : Swift.Hashable {
+  public func set() -> Swift.Set<Swift.Array<Element>.Element>
+  public func isSubset(of array: Swift.Array<Element>) -> Swift.Bool
+  public func isSuperset(of array: Swift.Array<Element>) -> Swift.Bool
+  public func commonElements(between array: Swift.Array<Element>) -> Swift.Array<Element>
+  public func hasCommonElements(with array: Swift.Array<Element>) -> Swift.Bool
 }
 extension Passbase.ColorFormatDenominator : Swift.Equatable {}
 extension Passbase.ColorFormatDenominator : Swift.Hashable {}
