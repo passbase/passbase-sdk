@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-// swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Passbase
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
 import CoreGraphics
@@ -12,7 +12,21 @@ import MobileCoreServices
 import QuartzCore
 import Swift
 import UIKit
+import Vision
 import ZoomAuthentication
+public protocol MVPDelegate : AnyObject {
+  func onSelfieChallengeCompleted(state: Passbase.SelfieFinishState)
+}
+public enum SelfieFinishState {
+  case success
+  case error
+  case cancel
+  public static func == (a: Passbase.SelfieFinishState, b: Passbase.SelfieFinishState) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
 public typealias LottieCompletionBlock = (Swift.Bool) -> Swift.Void
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PassbaseButton : UIKit.UIButton {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -49,6 +63,9 @@ public struct AnimationKeypath {
 }
 public struct URLParameterEncoder : Passbase.ParameterEncoder {
   public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
+}
+public protocol SelfieErrorViewDelegate : AnyObject {
+  func didClickErrorRetakeButton()
 }
 extension PBAnimation {
   public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationCache: Passbase.AnimationCacheProvider? = nil) -> Passbase.PBAnimation?
@@ -198,12 +215,20 @@ public enum NetworkError : Swift.String, Swift.Error {
     get
   }
 }
+public protocol NavigationBarViewDelegate : AnyObject {
+  func didClickBackNavigationButton()
+  func didClickCloseNavigationButton()
+}
 public class Asset : Swift.Codable {
   required public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
 }
 public typealias NetworkRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
+public protocol RedoViewDelegate : AnyObject {
+  func didClickRedoButton()
+  func didClickConfirmVideoButton()
+}
 @_hasMissingDesignatedInitializers final public class PointValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
     get
@@ -416,6 +441,8 @@ extension Array where Element : Swift.Hashable {
   public func commonElements(between array: Swift.Array<Element>) -> Swift.Array<Element>
   public func hasCommonElements(with array: Swift.Array<Element>) -> Swift.Bool
 }
+extension Passbase.SelfieFinishState : Swift.Equatable {}
+extension Passbase.SelfieFinishState : Swift.Hashable {}
 extension Passbase.ColorFormatDenominator : Swift.Equatable {}
 extension Passbase.ColorFormatDenominator : Swift.Hashable {}
 extension Passbase.LottieBackgroundBehavior : Swift.Equatable {}
