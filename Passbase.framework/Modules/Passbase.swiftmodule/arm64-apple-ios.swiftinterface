@@ -14,7 +14,7 @@ import Swift
 import UIKit
 import Vision
 import ZoomAuthentication
-public protocol MVPDelegate : AnyObject {
+public protocol LivenessDelegate : AnyObject {
   func onSelfieChallengeCompleted(state: Passbase.SelfieFinishState)
 }
 public enum SelfieFinishState {
