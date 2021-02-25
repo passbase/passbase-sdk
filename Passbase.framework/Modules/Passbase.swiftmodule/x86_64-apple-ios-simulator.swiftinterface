@@ -38,6 +38,9 @@ extension UIResponder {
     get
   }
 }
+extension UIDevice {
+  #warning("ADD UNIT TEST for userAgent")
+}
 @_hasMissingDesignatedInitializers final public class FloatValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
     get
@@ -63,9 +66,6 @@ public struct AnimationKeypath {
 }
 public struct URLParameterEncoder : Passbase.ParameterEncoder {
   public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
-}
-public protocol SelfieErrorViewDelegate : AnyObject {
-  func didClickErrorRetakeButton()
 }
 extension PBAnimation {
   public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationCache: Passbase.AnimationCacheProvider? = nil) -> Passbase.PBAnimation?
@@ -215,9 +215,9 @@ public enum NetworkError : Swift.String, Swift.Error {
     get
   }
 }
-public protocol NavigationBarViewDelegate : AnyObject {
-  func didClickBackNavigationButton()
-  func didClickCloseNavigationButton()
+@objc public protocol NavigationBarViewDelegate : AnyObject {
+  @objc func didClickBackNavigationButton()
+  @objc optional func didClickCloseNavigationButton()
 }
 public class Asset : Swift.Codable {
   required public init(from decoder: Swift.Decoder) throws
@@ -225,10 +225,6 @@ public class Asset : Swift.Codable {
   @objc deinit
 }
 public typealias NetworkRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
-public protocol RedoViewDelegate : AnyObject {
-  func didClickRedoButton()
-  func didClickConfirmVideoButton()
-}
 @_hasMissingDesignatedInitializers final public class PointValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
     get
@@ -424,6 +420,36 @@ public struct Vector3D {
   final public func value(frame: CoreGraphics.CGFloat) -> Any
   @objc deinit
 }
+public enum ChallengeState {
+  case pending
+  case validating
+  case completed
+  case error
+  public static func == (a: Passbase.ChallengeState, b: Passbase.ChallengeState) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum ChallengeMessage : Swift.String {
+  case initializer
+  case promt
+  case validation
+  case start_ok
+  case finish_ok
+  case timeout
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public protocol ChallangeManagerDelegate : AnyObject {
+  func didFailChallenge()
+  func didCompleteChallenge(id: Swift.String)
+  func shouldStartRecording()
+  func shouldUpdateInstruction(message: Passbase.ChallengeMessage)
+}
 extension UIColor {
   public var lottieColorValue: Passbase.Color {
     get
@@ -467,3 +493,8 @@ extension Passbase.BlendMode : Swift.RawRepresentable {}
 extension Passbase.HTTPMethod : Swift.Equatable {}
 extension Passbase.HTTPMethod : Swift.Hashable {}
 extension Passbase.HTTPMethod : Swift.RawRepresentable {}
+extension Passbase.ChallengeState : Swift.Equatable {}
+extension Passbase.ChallengeState : Swift.Hashable {}
+extension Passbase.ChallengeMessage : Swift.Equatable {}
+extension Passbase.ChallengeMessage : Swift.Hashable {}
+extension Passbase.ChallengeMessage : Swift.RawRepresentable {}

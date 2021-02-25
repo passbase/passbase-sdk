@@ -286,6 +286,14 @@ SWIFT_CLASS("_TtC8Passbase10LottieView")
 @end
 
 
+SWIFT_PROTOCOL("_TtP8Passbase25NavigationBarViewDelegate_")
+@protocol NavigationBarViewDelegate
+- (void)didClickBackNavigationButton;
+@optional
+- (void)didClickCloseNavigationButton;
+@end
+
+
 SWIFT_CLASS("_TtC8Passbase14PassbaseButton")
 @interface PassbaseButton : UIButton
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
