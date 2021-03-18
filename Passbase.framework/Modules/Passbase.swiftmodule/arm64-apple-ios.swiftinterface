@@ -14,12 +14,11 @@ import Swift
 import UIKit
 import Vision
 import ZoomAuthentication
-public protocol LivenessDelegate : AnyObject {
-  func onSelfieChallengeCompleted(state: Passbase.SelfieFinishState)
-}
 public enum SelfieFinishState {
   case success
-  case error
+  case unknownError
+  case authenticationError
+  case authenticationFinish
   case cancel
   public static func == (a: Passbase.SelfieFinishState, b: Passbase.SelfieFinishState) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -444,11 +443,12 @@ public enum ChallengeMessage : Swift.String {
   }
   public init?(rawValue: Swift.String)
 }
-public protocol ChallangeManagerDelegate : AnyObject {
+public protocol ChallengeManagerDelegate : AnyObject {
   func didFailChallenge()
   func didCompleteChallenge(id: Swift.String)
   func shouldStartRecording()
   func shouldUpdateInstruction(message: Passbase.ChallengeMessage)
+  func criticalChallangeError()
 }
 extension UIColor {
   public var lottieColorValue: Passbase.Color {
