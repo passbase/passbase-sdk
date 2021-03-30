@@ -348,6 +348,7 @@ public protocol PassbaseDelegate : AnyObject {
     get
     set
   }
+  public static var prefillCountry: Swift.String?
   public static var source: Swift.Int {
     get
     set
@@ -431,8 +432,9 @@ public enum ChallengeState {
   public func hash(into hasher: inout Swift.Hasher)
 }
 public enum ChallengeMessage : Swift.String {
-  case initializer
-  case promt
+  case promt_init
+  case promt_close
+  case promt_far
   case validation
   case start_ok
   case finish_ok
