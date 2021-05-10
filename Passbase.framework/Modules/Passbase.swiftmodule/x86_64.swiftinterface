@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
 // swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Passbase
 import AVFoundation
 import AVKit
@@ -21,10 +21,10 @@ public enum SelfieFinishState {
   case authenticationFinish
   case cancel
   public static func == (a: Passbase.SelfieFinishState, b: Passbase.SelfieFinishState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public typealias LottieCompletionBlock = (Swift.Bool) -> Swift.Void
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PassbaseButton : UIKit.UIButton {
@@ -95,16 +95,16 @@ public enum ColorFormatDenominator {
   case OneHundred
   case TwoFiftyFive
   public static func == (a: Passbase.ColorFormatDenominator, b: Passbase.ColorFormatDenominator) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public struct Color {
 }
 @_hasMissingDesignatedInitializers @objc final public class CompatibleAnimation : ObjectiveC.NSObject {
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class CompatibleAnimationView : UIKit.UIView {
   @objc override final public var contentMode: UIKit.UIView.ContentMode {
@@ -134,10 +134,10 @@ public enum LottieBackgroundBehavior {
   case pauseAndRestore
   case forceFinish
   public static func == (a: Passbase.LottieBackgroundBehavior, b: Passbase.LottieBackgroundBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum LottieLoopMode {
   case playOnce
@@ -152,8 +152,8 @@ extension LottieLoopMode : Swift.Equatable {
 public enum CoordinateSpace : Swift.Int, Swift.Codable {
   case type2d
   case type3d
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -174,6 +174,9 @@ final public class PBAnimation : Swift.Codable {
   public func animation(forKey: Swift.String) -> Passbase.PBAnimation?
   public func setAnimation(_ animation: Passbase.PBAnimation, forKey: Swift.String)
   @objc deinit
+}
+extension UIScreen {
+  public func setBrightness(to value: CoreGraphics.CGFloat, duration: Foundation.TimeInterval = 0.3, ticksPerSecond: Swift.Double = 120)
 }
 public typealias AnimationFrameTime = CoreGraphics.CGFloat
 public typealias AnimationProgressTime = CoreGraphics.CGFloat
@@ -198,30 +201,30 @@ public enum ParameterEncoding {
   case urlAndJsonEncoding
   public func encode(urlRequest: inout Foundation.URLRequest, bodyParameters: Passbase.Parameters?, urlParameters: Passbase.Parameters?) throws
   public static func == (a: Passbase.ParameterEncoding, b: Passbase.ParameterEncoding) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum NetworkError : Swift.String, Swift.Error {
   case parametersNil
   case encodingFailed
   case missingURL
   case missingFile
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
-@objc public protocol NavigationBarViewDelegate : AnyObject {
+@objc public protocol NavigationBarViewDelegate {
   @objc func didClickBackNavigationButton()
   @objc optional func didClickCloseNavigationButton()
 }
 public class Asset : Swift.Codable {
   required public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
 }
 public typealias NetworkRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
 @_hasMissingDesignatedInitializers final public class PointValueProvider : Passbase.AnyValueProvider {
@@ -248,8 +251,8 @@ public enum LayerType : Swift.Int, Swift.Codable {
   case shape
   case text
   public init(from decoder: Swift.Decoder) throws
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -259,8 +262,8 @@ public enum MatteType : Swift.Int, Swift.Codable {
   case add
   case invert
   case unknown
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -282,8 +285,8 @@ public enum BlendMode : Swift.Int, Swift.Codable {
   case saturation
   case color
   case luminosity
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -310,8 +313,8 @@ public enum BlendMode : Swift.Int, Swift.Codable {
     @objc get
   }
   open func animationDidSet()
-  @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
 }
 public typealias HTTPHeaders = [Swift.String : Swift.String]
 public enum HTTPTask {
@@ -337,6 +340,7 @@ public protocol AnimationTextProvider : AnyObject {
   @objc deinit
 }
 public protocol PassbaseDelegate : AnyObject {
+  func onSubmitted(identityAccessKey: Swift.String)
   func onFinish(identityAccessKey: Swift.String)
   func onError(errorCode: Swift.String)
   func onStart()
@@ -355,8 +359,8 @@ public protocol PassbaseDelegate : AnyObject {
   }
   public static func initialize(publishableApiKey: Swift.String)
   public static func startVerification(from: UIKit.UIViewController) throws
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public struct JSONParameterEncoder : Passbase.ParameterEncoder {
   public func encode(urlRequest: inout Foundation.URLRequest, with parameters: Passbase.Parameters) throws
@@ -364,11 +368,11 @@ public struct JSONParameterEncoder : Passbase.ParameterEncoder {
 public enum HTTPMethod : Swift.String {
   case get
   case post
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 infix operator +| : DefaultPrecedence
 infix operator +- : DefaultPrecedence
@@ -389,9 +393,9 @@ extension Vector3D {
   }
 }
 @objc @_inheritsConvenienceInitializers final public class AnimationSubview : UIKit.UIView {
-  @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers final public class SizeValueProvider : Passbase.AnyValueProvider {
   final public var valueType: Any.Type {
@@ -405,8 +409,8 @@ public protocol AnimationImageProvider {
   func imageForAsset(asset: Passbase.ImageAsset) -> CoreGraphics.CGImage?
 }
 @_hasMissingDesignatedInitializers @objc final public class CompatibleAnimationKeypath : ObjectiveC.NSObject {
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public struct Vector1D {
 }
@@ -426,10 +430,10 @@ public enum ChallengeState {
   case completed
   case error
   public static func == (a: Passbase.ChallengeState, b: Passbase.ChallengeState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public enum ChallengeMessage : Swift.String {
   case promt_init
@@ -439,11 +443,11 @@ public enum ChallengeMessage : Swift.String {
   case start_ok
   case finish_ok
   case timeout
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 public protocol ChallengeManagerDelegate : AnyObject {
   func didFailChallenge()
