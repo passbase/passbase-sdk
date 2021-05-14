@@ -348,6 +348,7 @@ public protocol PassbaseDelegate : AnyObject {
 @objc @_inheritsConvenienceInitializers public class PassbaseSDK : ObjectiveC.NSObject {
   public static let version: Swift.String
   weak public static var delegate: Passbase.PassbaseDelegate?
+  public static var metaData: Swift.String?
   public static var prefillUserEmail: Swift.String? {
     get
     set
